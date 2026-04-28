@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Birthday Card 2026</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --pixel-size: 4px;
+      --cream: #FFF8E7;
+      --dark-cream: #F5E6C8;
+      --orange: #FF6B35;
+      --pink: #FF69B4;
+      --brown: #8B4513;
+      --white: #FFFFFF;
+      --black: #1A1A1A;
+      --gray: #888888;
+      --light-gray: #CCCCCC;
+      --cat-orange: #FF8C42;
+      --cat-black: #2D2D2D;
+      --cat-white: #FAFAFA;
+      --cake-pink: #FFB6C1;
+      --cake-yellow: #FFE4B5;
+      --cake-brown: #D2691E;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--cream);
+      min-height: 100vh;
+      overflow: hidden;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      -webkit-font-smoothing: none;
+    }
+
+    /* ==================== PAGE CONTAINER ==================== */
+    .page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      image-rendering: pixelated;
+    }
+
+    .page.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==================== PAGE 1: COVER ==================== */
+    .page-1 {
+      background: var(--cream);
+    }
+
+    /* Twinkling Stars */
+    .stars-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      animation: twinkle 2s infinite;
+    }
+
+    .star::before, .star::after {
+      content: '';
+      position: absolute;
+      background: var(--orange);
+    }
+
+    .star::before {
+      width: 8px;
+      height: 2px;
+      top: 3px;
+      left: 0;
+    }
+
+    .star::after {
+      width: 2px;
+      height: 8px;
+      top: 0;
+      left: 3px;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Pixel Sign Board */
+    .sign-board {
+      position: relative;
+      width: clamp(200px, 50vw, 320px);
+      height: clamp(80px, 20vw, 120px);
+      background: var(--white);
+      border: 4px solid var(--brown);
+      box-shadow:
+        4px 4px 0 var(--brown),
+        8px 8px 0 #5D3A1A,
+        inset 8px 8px 0 var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      z-index: 10;
+    }
+
+    .sign-board::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 20px;
+      background: var(--brown);
+    }
+
+    .sign-date {
+      font-size: clamp(16px, 4vw, 28px);
+      font-weight: bold;
+      color: var(--brown);
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 var(--orange);
+    }
+
+    /* Calico Cat - Using box-shadow pixels */
+    .cat-container {
+      position: relative;
+      width: 120px;
+      height: 100px;
+      margin-top: -30px;
+      z-index: 20;
+    }
+
+    .cat-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        /* Body base - white */
+        0 0 0 var(--cat-white),
+        4px 0 0 var(--cat-white),
+        8px 0 0 var(--cat-white),
+        12px 0 0 var(--cat-white),
+        16px 0 0 var(--cat-white),
+        20px 0 0 var(--cat-orange),
+        24px 0 0 var(--cat-orange),
+        28px 0 0 var(--cat-orange),
+        32px 0 0 var(--cat-orange),
+        36px 0 0 var(--cat-orange),
+        40px 0 0 var(--cat-orange),
+        44px 0 0 var(--cat-orange),
+        48px 0 0 var(--cat-white),
+        52px 0 0 var(--cat-white),
+        56px 0 0 var(--cat-white),
+        /* Row 2 */
+        0 4px 0 var(--cat-white),
+        4px 4px 0 var(--cat-white),
+        8px 4px 0 var(--cat-white),
+        12px 4px 0 var(--cat-white),
+        16px 4px 0 var(--cat-white),
+        20px 4px 0 var(--cat-orange),
+        24px 4px 0 var(--cat-orange),
+        28px 4px 0 var(--cat-orange),
+        32px 4px 0 var(--cat-orange),
+        36px 4px 0 var(--cat-orange),
+        40px 4px 0 var(--cat-orange),
+        44px 4px 0 var(--cat-orange),
+        48px 4px 0 var(--cat-white),
+        52px 4px 0 var(--cat-white),
+        56px 4px 0 var(--cat-white),
+        /* Row 3 */
+        0 8px 0 var(--cat-white),
+        4px 8px 0 var(--cat-white),
+        8px 8px 0 var(--cat-white),
+        12px 8px 0 var(--cat-white),
+        16px 8px 0 var(--cat-white),
+        20px 8px 0 var(--cat-black),
+        24px 8px 0 var(--cat-black),
+        28px 8px 0 var(--cat-black),
+        32px 8px 0 var(--cat-orange),
+        36px 8px 0 var(--cat-orange),
+        40px 8px 0 var(--cat-orange),
+        44px 8px 0 var(--cat-white),
+        48px 8px 0 var(--cat-white),
+        52px 8px 0 var(--cat-white),
+        56px 8px 0 var(--cat-white),
+        /* Row 4 */
+        0 12px 0 var(--cat-white),
+        4px 12px 0 var(--cat-white),
+        8px 12px 0 var(--cat-white),
+        12px 12px 0 var(--cat-white),
+        16px 12px 0 var(--cat-white),
+        20px 12px 0 var(--cat-black),
+        24px 12px 0 var(--cat-black),
+        28px 12px 0 var(--cat-black),
+        32px 12px 0 var(--cat-orange),
+        36px 12px 0 var(--cat-orange),
+        40px 12px 0 var(--cat-orange),
+        44px 12px 0 var(--cat-white),
+        48px 12px 0 var(--cat-white),
+        52px 12px 0 var(--cat-white),
+        56px 12px 0 var(--cat-white),
+        /* Row 5 */
+        4px 16px 0 var(--cat-white),
+        8px 16px 0 var(--cat-white),
+        12px 16px 0 var(--cat-white),
+        16px 16px 0 var(--cat-white),
+        20px 16px 0 var(--cat-white),
+        24px 16px 0 var(--cat-white),
+        28px 16px 0 var(--cat-white),
+        32px 16px 0 var(--cat-white),
+        36px 16px 0 var(--cat-white),
+        40px 16px 0 var(--cat-white),
+        44px 16px 0 var(--cat-white),
+        48px 16px 0 var(--cat-white),
+        52px 16px 0 var(--cat-white),
+        /* Tail */
+        60px 8px 0 var(--cat-orange),
+        64px 4px 0 var(--cat-orange),
+        68px 0 0 var(--cat-orange),
+        72px 4px 0 var(--cat-orange);
+    }
+
+    .cat-head {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        /* Head base */
+        4px 4px 0 var(--cat-white),
+        8px 4px 0 var(--cat-white),
+        12px 4px 0 var(--cat-white),
+        16px 4px 0 var(--cat-white),
+        20px 4px 0 var(--cat-white),
+        24px 4px 0 var(--cat-white),
+        28px 4px 0 var(--cat-white),
+        32px 4px 0 var(--cat-white),
+        36px 4px 0 var(--cat-white),
+        40px 4px 0 var(--cat-orange),
+        44px 4px 0 var(--cat-orange),
+        /* Row 2 */
+        0 8px 0 var(--cat-orange),
+        4px 8px 0 var(--cat-orange),
+        8px 8px 0 var(--cat-white),
+        12px 8px 0 var(--cat-white),
+        16px 8px 0 var(--cat-white),
+        20px 8px 0 var(--cat-white),
+        24px 8px 0 var(--cat-white),
+        28px 8px 0 var(--cat-white),
+        32px 8px 0 var(--cat-white),
+        36px 8px 0 var(--cat-white),
+        40px 8px 0 var(--cat-orange),
+        44px 8px 0 var(--cat-orange),
+        48px 8px 0 var(--cat-black),
+        /* Row 3 */
+        0 12px 0 var(--cat-orange),
+        4px 12px 0 var(--cat-orange),
+        8px 12px 0 var(--cat-white),
+        12px 12px 0 var(--cat-white),
+        16px 12px 0 var(--cat-white),
+        20px 12px 0 var(--cat-white),
+        24px 12px 0 var(--cat-white),
+        28px 12px 0 var(--cat-white),
+        32px 12px 0 var(--cat-white),
+        36px 12px 0 var(--cat-black),
+        40px 12px 0 var(--cat-black),
+        44px 12px 0 var(--cat-black),
+        48px 12px 0 var(--cat-black),
+        /* Row 4 - Eyes */
+        4px 16px 0 var(--cat-white),
+        8px 16px 0 var(--cat-white),
+        12px 16px 0 var(--cat-white),
+        16px 16px 0 var(--cat-black),
+        20px 16px 0 var(--cat-black),
+        24px 16px 0 var(--cat-white),
+        28px 16px 0 var(--cat-white),
+        32px 16px 0 var(--cat-black),
+        36px 16px 0 var(--cat-black),
+        40px 16px 0 var(--cat-white),
+        44px 16px 0 var(--cat-white),
+        48px 16px 0 var(--cat-white),
+        /* Row 5 */
+        8px 20px 0 var(--cat-white),
+        12px 20px 0 var(--cat-white),
+        16px 20px 0 var(--cat-white),
+        20px 20px 0 var(--cat-white),
+        24px 20px 0 var(--pink),
+        28px 20px 0 var(--cat-white),
+        32px 20px 0 var(--cat-white),
+        36px 20px 0 var(--cat-white),
+        40px 20px 0 var(--cat-white),
+        44px 20px 0 var(--cat-white),
+        /* Row 6 - Mouth */
+        12px 24px 0 var(--cat-white),
+        16px 24px 0 var(--cat-white),
+        20px 24px 0 var(--pink),
+        24px 24px 0 var(--pink),
+        28px 24px 0 var(--pink),
+        32px 24px 0 var(--cat-white),
+        36px 24px 0 var(--cat-white),
+        40px 24px 0 var(--cat-white),
+        /* Ears - Left (orange) */
+        0 0 0 var(--cat-orange),
+        4px 0 0 var(--cat-orange),
+        /* Ears - Right (black) */
+        44px 0 0 var(--cat-black),
+        48px 0 0 var(--cat-black);
+    }
+
+    .cat-ear-left, .cat-ear-right {
+      position: absolute;
+      width: 0;
+      height: 0;
+      animation: ear-twitch 4s infinite;
+    }
+
+    .cat-ear-left {
+      bottom: 85px;
+      left: 25px;
+      animation-delay: 0s;
+    }
+
+    .cat-ear-right {
+      bottom: 85px;
+      right: 25px;
+      animation-delay: 2s;
+    }
+
+    @keyframes ear-twitch {
+      0%, 95%, 100% { transform: rotate(0deg); }
+      96% { transform: rotate(-10deg); }
+      97% { transform: rotate(5deg); }
+      98% { transform: rotate(-5deg); }
+    }
+
+    /* START Button */
+    .start-btn {
+      margin-top: 40px;
+      padding: 16px 40px;
+      font-size: clamp(14px, 3vw, 20px);
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      color: var(--white);
+      background: var(--orange);
+      border: 4px solid var(--black);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.1s;
+      box-shadow:
+        4px 4px 0 var(--black),
+        8px 8px 0 #CC5529;
+    }
+
+    .start-btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow:
+        2px 2px 0 var(--black),
+        4px 4px 0 #CC5529;
+    }
+
+    .start-btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+
+    /* Block Shatter Transition */
+    .shatter-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .shatter-block {
+      position: absolute;
+      background: var(--cream);
+      animation: shatter 0.8s forwards;
+    }
+
+    @keyframes shatter {
+      0% { transform: scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: scale(0.5) rotate(180deg); opacity: 0; }
+    }
+
+    /* ==================== PAGE 2: CAKE ==================== */
+    .page-2 {
+      background: linear-gradient(180deg, #FFE4E1 0%, #FFF0F5 100%);
+      transition: background 1s ease;
+    }
+
+    .page-2.dark {
+      background: linear-gradient(180deg, #2D2D2D 0%, #1A1A1A 100%);
+    }
+
+    .cake-container {
+      position: relative;
+      width: clamp(200px, 60vw, 300px);
+      height: clamp(250px, 50vh, 350px);
+    }
+
+    /* Three Layer Cake - Pixel Art Style */
+    .cake-layer {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cake-layer-1 {
+      bottom: 0;
+      width: clamp(160px, 50vw, 240px);
+      height: 80px;
+      background: var(--cake-brown);
+      border: 4px solid #5D3A1A;
+      box-shadow:
+        /* Decorative stripes */
+        inset 0 8px 0 #A0522D,
+        inset 0 16px 0 var(--cake-brown),
+        inset 0 24px 0 #A0522D,
+        inset 0 32px 0 var(--cake-brown),
+        inset 0 40px 0 #A0522D,
+        /* 3D effect */
+        4px 4px 0 #3D2A1A;
+    }
+
+    .cake-layer-2 {
+      bottom: 80px;
+      width: clamp(120px, 38vw, 180px);
+      height: 70px;
+      background: var(--cake-pink);
+      border: 4px solid #FF69B4;
+      box-shadow:
+        inset 0 8px 0 #FF69B4,
+        inset 0 16px 0 var(--cake-pink),
+        inset 0 24px 0 #FF69B4,
+        inset 0 32px 0 var(--cake-pink),
+        4px 4px 0 #CC5599;
+    }
+
+    .cake-layer-3 {
+      bottom: 150px;
+      width: clamp(80px, 25vw, 120px);
+      height: 60px;
+      background: var(--cake-yellow);
+      border: 4px solid #DAA520;
+      box-shadow:
+        inset 0 8px 0 #FFD700,
+        inset 0 16px 0 var(--cake-yellow),
+        inset 0 24px 0 #FFD700,
+        4px 4px 0 #B8860B;
+    }
+
+    /* Candles */
+    .candles-container {
+      position: absolute;
+      bottom: 210px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: clamp(12px, 3vw, 20px);
+    }
+
+    .candle {
+      position: relative;
+      width: 12px;
+      height: 40px;
+      background: linear-gradient(90deg, #FF69B4 50%, #FF1493 50%);
+      border: 2px solid var(--black);
+      cursor: pointer;
+      transition: filter 0.3s;
+    }
+
+    .candle::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 8px;
+      background: var(--black);
+    }
+
+    .flame {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 20px;
+      background: var(--orange);
+      animation: flicker 0.15s infinite alternate;
+    }
+
+    .flame::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 2px;
+      width: 8px;
+      height: 12px;
+      background: yellow;
+    }
+
+    .flame.frame-2 {
+      transform: translateX(-50%) scaleY(0.9) scaleX(1.1);
+    }
+
+    @keyframes flicker {
+      0% {
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        background: #FF6B35;
+      }
+      100% {
+        transform: translateX(-50%) scaleY(1.15) scaleX(0.85);
+        background: #FFD700;
+      }
+    }
+
+    .candle.blown .flame {
+      background: var(--gray);
+      animation: none;
+    }
+
+    .candle.blown .flame::before {
+      background: var(--light-gray);
+    }
+
+    /* Smoke */
+    .smoke {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--gray);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .candle.blown .smoke {
+      animation: smoke-rise 1s forwards;
+    }
+
+    @keyframes smoke-rise {
+      0% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-40px) scale(1.5);
+      }
+    }
+
+    /* Cat Fireworks */
+    .firework {
+      position: absolute;
+      pointer-events: none;
+      animation: firework-burst 1s forwards;
+    }
+
+    .cat-firework {
+      width: 4px;
+      height: 4px;
+      background: transparent;
+    }
+
+    @keyframes firework-burst {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .instruction {
+      position: absolute;
+      bottom: 10%;
+      font-size: clamp(12px, 2.5vw, 16px);
+      color: var(--brown);
+      animation: bounce 1s infinite;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ==================== PAGE 3: MESSAGE ==================== */
+    .page-3 {
+      background: linear-gradient(180deg, #E6E6FA 0%, #FFF8E7 100%);
+      padding: 20px;
+    }
+
+    .dialogue-box {
+      position: relative;
+      width: clamp(280px, 80vw, 500px);
+      min-height: 120px;
+      background: var(--white);
+      border: 4px solid var(--black);
+      padding: 20px;
+      margin-bottom: 40px;
+      box-shadow: 4px 4px 0 var(--black);
+    }
+
+    .dialogue-box::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 30px;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 0px solid transparent;
+      border-top: 20px solid var(--white);
+    }
+
+    .dialogue-box::before {
+      content: '';
+      position: absolute;
+      bottom: -24px;
+      left: 26px;
+      width: 0;
+      height: 0;
+      border-left: 24px solid transparent;
+      border-right: 0px solid transparent;
+      border-top: 24px solid var(--black);
+    }
+
+    .typewriter-text {
+      font-size: clamp(14px, 3vw, 18px);
+      line-height: 1.8;
+      color: var(--black);
+      min-height: 80px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--black);
+      animation: blink 0.5s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Party Cats */
+    .party-cats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .party-cat {
+      position: relative;
+      width: 60px;
+      height: 80px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .party-cat:hover {
+      transform: scale(1.1);
+    }
+
+    /* Cat 1 - Orange */
+    .cat-1 {
+      width: 4px;
+      height: 4px;
+      background: transparent;
+    }
+
+    .cat-1 .party-cat-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        /* Body */
+        0 0 0 var(--cat-orange),
+        4px 0 0 var(--cat-orange),
+        8px 0 0 var(--cat-orange),
+        12px 0 0 var(--cat-orange),
+        16px 0 0 var(--cat-orange),
+        20px 0 0 var(--cat-orange),
+        24px 0 0 var(--cat-orange),
+        28px 0 0 var(--cat-orange),
+        32px 0 0 var(--cat-orange),
+        36px 0 0 var(--cat-orange),
+        /* Row 2 */
+        0 4px 0 var(--cat-orange),
+        4px 4px 0 var(--cat-orange),
+        8px 4px 0 var(--cat-orange),
+        12px 4px 0 var(--cat-orange),
+        16px 4px 0 var(--cat-orange),
+        20px 4px 0 var(--cat-orange),
+        24px 4px 0 var(--cat-orange),
+        28px 4px 0 var(--cat-orange),
+        32px 4px 0 var(--cat-orange),
+        36px 4px 0 var(--cat-orange),
+        /* Row 3 */
+        4px 8px 0 var(--cat-orange),
+        8px 8px 0 var(--cat-orange),
+        12px 8px 0 var(--cat-orange),
+        16px 8px 0 var(--cat-orange),
+        20px 8px 0 var(--cat-orange),
+        24px 8px 0 var(--cat-orange),
+        28px 8px 0 var(--cat-orange),
+        32px 8px 0 var(--cat-orange);
+    }
+
+    .cat-1 .party-cat-head {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        /* Head */
+        4px 4px 0 var(--cat-orange),
+        8px 4px 0 var(--cat-orange),
+        12px 4px 0 var(--cat-orange),
+        16px 4px 0 var(--cat-orange),
+        20px 4px 0 var(--cat-orange),
+        24px 4px 0 var(--cat-orange),
+        28px 4px 0 var(--cat-orange),
+        /* Row 2 */
+        0 8px 0 var(--cat-orange),
+        4px 8px 0 var(--cat-orange),
+        8px 8px 0 var(--cat-orange),
+        12px 8px 0 var(--cat-orange),
+        16px 8px 0 var(--cat-orange),
+        20px 8px 0 var(--cat-orange),
+        24px 8px 0 var(--cat-orange),
+        28px 8px 0 var(--cat-orange),
+        32px 8px 0 var(--cat-orange),
+        /* Row 3 - Eyes */
+        4px 12px 0 var(--cat-orange),
+        8px 12px 0 var(--cat-orange),
+        12px 12px 0 var(--black),
+        16px 12px 0 var(--black),
+        20px 12px 0 var(--cat-orange),
+        24px 12px 0 var(--cat-orange),
+        28px 12px 0 var(--cat-orange),
+        /* Row 4 */
+        8px 16px 0 var(--cat-orange),
+        12px 16px 0 var(--cat-orange),
+        16px 16px 0 var(--pink),
+        20px 16px 0 var(--cat-orange),
+        24px 16px 0 var(--cat-orange),
+        /* Ears */
+        0 0 0 var(--cat-orange),
+        4px 0 0 var(--cat-orange),
+        28px 0 0 var(--cat-orange),
+        32px 0 0 var(--cat-orange);
+    }
+
+    /* Cat 2 - Black */
+    .cat-2 .party-cat-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        0 0 0 var(--cat-black),
+        4px 0 0 var(--cat-black),
+        8px 0 0 var(--cat-black),
+        12px 0 0 var(--cat-black),
+        16px 0 0 var(--cat-black),
+        20px 0 0 var(--cat-black),
+        24px 0 0 var(--cat-black),
+        28px 0 0 var(--cat-black),
+        32px 0 0 var(--cat-black),
+        36px 0 0 var(--cat-black),
+        0 4px 0 var(--cat-black),
+        4px 4px 0 var(--cat-black),
+        8px 4px 0 var(--cat-black),
+        12px 4px 0 var(--cat-black),
+        16px 4px 0 var(--cat-black),
+        20px 4px 0 var(--cat-black),
+        24px 4px 0 var(--cat-black),
+        28px 4px 0 var(--cat-black),
+        32px 4px 0 var(--cat-black),
+        36px 4px 0 var(--cat-black),
+        4px 8px 0 var(--cat-black),
+        8px 8px 0 var(--cat-black),
+        12px 8px 0 var(--cat-black),
+        16px 8px 0 var(--cat-black),
+        20px 8px 0 var(--cat-black),
+        24px 8px 0 var(--cat-black),
+        28px 8px 0 var(--cat-black),
+        32px 8px 0 var(--cat-black);
+    }
+
+    .cat-2 .party-cat-head {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        4px 4px 0 var(--cat-black),
+        8px 4px 0 var(--cat-black),
+        12px 4px 0 var(--cat-black),
+        16px 4px 0 var(--cat-black),
+        20px 4px 0 var(--cat-black),
+        24px 4px 0 var(--cat-black),
+        28px 4px 0 var(--cat-black),
+        0 8px 0 var(--cat-black),
+        4px 8px 0 var(--cat-black),
+        8px 8px 0 var(--cat-black),
+        12px 8px 0 var(--cat-black),
+        16px 8px 0 var(--cat-black),
+        20px 8px 0 var(--cat-black),
+        24px 8px 0 var(--cat-black),
+        28px 8px 0 var(--cat-black),
+        32px 8px 0 var(--cat-black),
+        4px 12px 0 var(--cat-black),
+        8px 12px 0 var(--cat-black),
+        12px 12px 0 #FFD700,
+        16px 12px 0 #FFD700,
+        20px 12px 0 var(--cat-black),
+        24px 12px 0 var(--cat-black),
+        28px 12px 0 var(--cat-black),
+        8px 16px 0 var(--cat-black),
+        12px 16px 0 var(--cat-black),
+        16px 16px 0 var(--pink),
+        20px 16px 0 var(--cat-black),
+        24px 16px 0 var(--cat-black),
+        0 0 0 var(--cat-black),
+        4px 0 0 var(--cat-black),
+        28px 0 0 var(--cat-black),
+        32px 0 0 var(--cat-black);
+    }
+
+    /* Cat 3 - White */
+    .cat-3 .party-cat-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        0 0 0 var(--cat-white),
+        4px 0 0 var(--cat-white),
+        8px 0 0 var(--cat-white),
+        12px 0 0 var(--cat-white),
+        16px 0 0 var(--cat-white),
+        20px 0 0 var(--cat-white),
+        24px 0 0 var(--cat-white),
+        28px 0 0 var(--cat-white),
+        32px 0 0 var(--cat-white),
+        36px 0 0 var(--cat-white),
+        0 4px 0 var(--cat-white),
+        4px 4px 0 var(--cat-white),
+        8px 4px 0 var(--cat-white),
+        12px 4px 0 var(--cat-white),
+        16px 4px 0 var(--cat-white),
+        20px 4px 0 var(--cat-white),
+        24px 4px 0 var(--cat-white),
+        28px 4px 0 var(--cat-white),
+        32px 4px 0 var(--cat-white),
+        36px 4px 0 var(--cat-white),
+        4px 8px 0 var(--cat-white),
+        8px 8px 0 var(--cat-white),
+        12px 8px 0 var(--cat-white),
+        16px 8px 0 var(--cat-white),
+        20px 8px 0 var(--cat-white),
+        24px 8px 0 var(--cat-white),
+        28px 8px 0 var(--cat-white),
+        32px 8px 0 var(--cat-white);
+    }
+
+    .cat-3 .party-cat-head {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        4px 4px 0 var(--cat-white),
+        8px 4px 0 var(--cat-white),
+        12px 4px 0 var(--cat-white),
+        16px 4px 0 var(--cat-white),
+        20px 4px 0 var(--cat-white),
+        24px 4px 0 var(--cat-white),
+        28px 4px 0 var(--cat-white),
+        0 8px 0 var(--cat-white),
+        4px 8px 0 var(--cat-white),
+        8px 8px 0 var(--cat-white),
+        12px 8px 0 var(--cat-white),
+        16px 8px 0 var(--cat-white),
+        20px 8px 0 var(--cat-white),
+        24px 8px 0 var(--cat-white),
+        28px 8px 0 var(--cat-white),
+        32px 8px 0 var(--cat-white),
+        4px 12px 0 var(--cat-white),
+        8px 12px 0 var(--cat-white),
+        12px 12px 0 var(--black),
+        16px 12px 0 var(--black),
+        20px 12px 0 var(--cat-white),
+        24px 12px 0 var(--cat-white),
+        28px 12px 0 var(--cat-white),
+        8px 16px 0 var(--cat-white),
+        12px 16px 0 var(--cat-white),
+        16px 16px 0 var(--pink),
+        20px 16px 0 var(--cat-white),
+        24px 16px 0 var(--cat-white),
+        0 0 0 var(--cat-white),
+        4px 0 0 var(--cat-white),
+        28px 0 0 var(--cat-white),
+        32px 0 0 var(--cat-white);
+    }
+
+    /* Party Hat */
+    .party-hat {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: transparent;
+    }
+
+    .cat-1 .party-hat {
+      box-shadow:
+        8px 20px 0 var(--pink),
+        12px 20px 0 var(--pink),
+        16px 20px 0 var(--pink),
+        10px 16px 0 var(--pink),
+        14px 16px 0 var(--pink),
+        12px 12px 0 var(--pink),
+        12px 8px 0 #FFD700;
+    }
+
+    .cat-2 .party-hat {
+      box-shadow:
+        8px 20px 0 var(--orange),
+        12px 20px 0 var(--orange),
+        16px 20px 0 var(--orange),
+        10px 16px 0 var(--orange),
+        14px 16px 0 var(--orange),
+        12px 12px 0 var(--orange),
+        12px 8px 0 #FFD700;
+    }
+
+    .cat-3 .party-hat {
+      box-shadow:
+        8px 20px 0 #9370DB,
+        12px 20px 0 #9370DB,
+        16px 20px 0 #9370DB,
+        10px 16px 0 #9370DB,
+        14px 16px 0 #9370DB,
+        12px 12px 0 #9370DB,
+        12px 8px 0 #FFD700;
+    }
+
+    /* Feed Button */
+    .feed-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 12px 24px;
+      font-size: clamp(12px, 2.5vw, 16px);
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      color: var(--white);
+      background: #4CAF50;
+      border: 3px solid var(--black);
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--black);
+      transition: transform 0.1s;
+      z-index: 100;
+    }
+
+    .feed-btn:hover {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0 var(--black);
+    }
+
+    .feed-btn:active {
+      transform: translate(3px, 3px);
+      box-shadow: none;
+    }
+
+    /* Falling Fish */
+    .fish {
+      position: fixed;
+      width: 24px;
+      height: 12px;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .fish-body {
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        /* Fish body */
+        0 4px 0 #4169E1,
+        4px 4px 0 #4169E1,
+        8px 4px 0 #4169E1,
+        12px 4px 0 #4169E1,
+        16px 4px 0 #4169E1,
+        /* Tail */
+        20px 2px 0 #4169E1,
+        20px 6px 0 #4169E1,
+        24px 0 0 #4169E1,
+        24px 4px 0 #4169E1,
+        24px 8px 0 #4169E1,
+        /* Eye */
+        4px 2px 0 var(--white);
+    }
+
+    /* Heart */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      color: #FF1493;
+      animation: heart-pop 0.5s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heart-pop {
+      0% {
+        transform: scale(0) translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2) translateY(-20px);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) translateY(-40px);
+        opacity: 0;
+      }
+    }
+
+    /* Fish fall animation */
+    @keyframes fish-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(calc(100vh - 200px)) rotate(20deg);
+      }
+    }
+
+    /* Cat eating animation */
+    .party-cat.eating {
+      animation: cat-eat 0.3s ease;
+    }
+
+    @keyframes cat-eat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1) translateY(-5px); }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .candles-container {
+        gap: 10px;
+      }
+
+      .candle {
+        width: 10px;
+        height: 35px;
+      }
+
+      .party-cats {
+        gap: 15px;
+      }
+
+      .feed-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 18px;
+      }
+
+      .cat-container {
+        transform: scale(0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE 1: Cover -->
+  <div class="page page-1 active" id="page1">
+    <div class="stars-container" id="starsContainer"></div>
+
+    <div class="sign-board">
+      <span class="sign-date">2026.04.28</span>
+    </div>
+
+    <div class="cat-container">
+      <div class="cat-head"></div>
+      <div class="cat-body"></div>
+    </div>
+
+    <button class="start-btn" id="startBtn">START</button>
+  </div>
+
+  <!-- PAGE 2: Cake -->
+  <div class="page page-2" id="page2">
+    <div class="cake-container">
+      <div class="cake-layer cake-layer-1"></div>
+      <div class="cake-layer cake-layer-2"></div>
+      <div class="cake-layer cake-layer-3"></div>
+
+      <div class="candles-container" id="candlesContainer">
+        <div class="candle" data-index="0">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+        <div class="candle" data-index="1">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+        <div class="candle" data-index="2">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+        <div class="candle" data-index="3">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+        <div class="candle" data-index="4">
+          <div class="flame"></div>
+          <div class="smoke"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="instruction" id="instruction">Click the candles to blow them out!</p>
+  </div>
+
+  <!-- PAGE 3: Message -->
+  <div class="page page-3" id="page3">
+    <div class="dialogue-box">
+      <p class="typewriter-text" id="typewriterText"></p>
+    </div>
+
+    <div class="party-cats">
+      <div class="party-cat cat-1">
+        <div class="party-hat"></div>
+        <div class="party-cat-head"></div>
+        <div class="party-cat-body"></div>
+      </div>
+      <div class="party-cat cat-2">
+        <div class="party-hat"></div>
+        <div class="party-cat-head"></div>
+        <div class="party-cat-body"></div>
+      </div>
+      <div class="party-cat cat-3">
+        <div class="party-hat"></div>
+        <div class="party-cat-head"></div>
+        <div class="party-cat-body"></div>
+      </div>
+    </div>
+
+    <button class="feed-btn" id="feedBtn">FEED</button>
+  </div>
+
+  <!-- Shatter Overlay -->
+  <div class="shatter-overlay" id="shatterOverlay"></div>
+
+  <script>
+    // ==================== STATE MANAGEMENT ====================
+    let currentPage = 1;
+    let blownCandles = 0;
+    const totalCandles = 5;
+    const message = "嘿！生日快乐！这是属于你的 2026 年特别时刻。愿你新的一年像猫咪一样自由快乐！";
+
+    // ==================== PAGE 1: STARS ====================
+    function createStars() {
+      const container = document.getElementById('starsContainer');
+      const starCount = 30;
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        star.style.transform = `scale(${0.5 + Math.random() * 0.5})`;
+        container.appendChild(star);
+      }
+    }
+
+    // ==================== PAGE TRANSITION: SHATTER ====================
+    function shatterTransition(callback) {
+      const overlay = document.getElementById('shatterOverlay');
+      overlay.innerHTML = '';
+
+      const blockSize = 40;
+      const cols = Math.ceil(window.innerWidth / blockSize);
+      const rows = Math.ceil(window.innerHeight / blockSize);
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const block = document.createElement('div');
+          block.className = 'shatter-block';
+          block.style.width = blockSize + 'px';
+          block.style.height = blockSize + 'px';
+          block.style.left = col * blockSize + 'px';
+          block.style.top = row * blockSize + 'px';
+
+          const delay = (row + col) * 20;
+          block.style.animationDelay = delay + 'ms';
+
+          const colors = ['#FFF8E7', '#FFE4C4', '#FFDAB9', '#FFE4B5'];
+          block.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+          overlay.appendChild(block);
+        }
+      }
+
+      setTimeout(() => {
+        callback();
+        setTimeout(() => {
+          overlay.innerHTML = '';
+        }, 100);
+      }, 600);
+    }
+
+    // ==================== PAGE 2: CANDLES ====================
+    function setupCandles() {
+      const candles = document.querySelectorAll('.candle');
+      candles.forEach(candle => {
+        candle.addEventListener('click', function() {
+          if (!this.classList.contains('blown')) {
+            this.classList.add('blown');
+            blownCandles++;
+
+            if (blownCandles === totalCandles) {
+              setTimeout(triggerFireworks, 500);
+            }
+          }
+        });
+      });
+    }
+
+    // ==================== PAGE 2: FIREWORKS ====================
+    function triggerFireworks() {
+      const page2 = document.getElementById('page2');
+      const instruction = document.getElementById('instruction');
+      instruction.style.display = 'none';
+
+      page2.classList.add('dark');
+
+      const colors = ['#FF69B4', '#FFD700', '#FF6B35', '#9370DB', '#00CED1'];
+      let fireworkCount = 0;
+      const maxFireworks = 15;
+
+      const fireworkInterval = setInterval(() => {
+        if (fireworkCount >= maxFireworks) {
+          clearInterval(fireworkInterval);
+          setTimeout(() => {
+            goToPage(3);
+          }, 1500);
+          return;
+        }
+
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = 10 + Math.random() * 80 + '%';
+        firework.style.top = 10 + Math.random() * 60 + '%';
+
+        const catHead = document.createElement('div');
+        catHead.className = 'cat-firework';
+
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        catHead.style.boxShadow = `
+          /* Cat head shape */
+          4px 0 0 ${color},
+          8px 0 0 ${color},
+          12px 0 0 ${color},
+          0 4px 0 ${color},
+          4px 4px 0 ${color},
+          8px 4px 0 ${color},
+          12px 4px 0 ${color},
+          16px 4px 0 ${color},
+          4px 8px 0 ${color},
+          8px 8px 0 ${color},
+          12px 8px 0 ${color},
+          /* Ears */
+          0 -4px 0 ${color},
+          16px -4px 0 ${color}
+        `;
+
+        firework.appendChild(catHead);
+        page2.appendChild(firework);
+
+        setTimeout(() => firework.remove(), 1000);
+
+        fireworkCount++;
+      }, 200);
+    }
+
+    // ==================== PAGE 3: TYPEWRITER ====================
+    function typeWriter(text, element, speed = 80) {
+      let i = 0;
+      element.innerHTML = '<span class="cursor"></span>';
+
+      function type() {
+        if (i < text.length) {
+          element.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+          i++;
+          setTimeout(type, speed);
+        } else {
+          element.innerHTML = text;
+        }
+      }
+
+      type();
+    }
+
+    // ==================== PAGE 3: FEED FISH ====================
+    function setupFeedButton() {
+      const feedBtn = document.getElementById('feedBtn');
+      const cats = document.querySelectorAll('.party-cat');
+
+      feedBtn.addEventListener('click', function() {
+        const fish = document.createElement('div');
+        fish.className = 'fish';
+        fish.innerHTML = '<div class="fish-body"></div>';
+        fish.style.left = Math.random() * 60 + 20 + '%';
+        fish.style.top = '0';
+        fish.style.animation = 'fish-fall 1.5s ease-in forwards';
+
+        document.body.appendChild(fish);
+
+        setTimeout(() => {
+          fish.remove();
+
+          const randomCat = cats[Math.floor(Math.random() * cats.length)];
+          randomCat.classList.add('eating');
+
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.textContent = '♥';
+          heart.style.left = randomCat.offsetLeft + randomCat.offsetWidth / 2 + 'px';
+          heart.style.top = randomCat.offsetTop + 'px';
+          randomCat.parentElement.appendChild(heart);
+
+          setTimeout(() => {
+            randomCat.classList.remove('eating');
+            heart.remove();
+          }, 500);
+        }, 1500);
+      });
+    }
+
+    // ==================== PAGE NAVIGATION ====================
+    function goToPage(pageNum) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      document.getElementById('page' + pageNum).classList.add('active');
+      currentPage = pageNum;
+
+      if (pageNum === 3) {
+        setTimeout(() => {
+          typeWriter(message, document.getElementById('typewriterText'));
+        }, 500);
+      }
+    }
+
+    // ==================== INITIALIZATION ====================
+    function init() {
+      createStars();
+      setupCandles();
+      setupFeedButton();
+
+      document.getElementById('startBtn').addEventListener('click', function() {
+        shatterTransition(() => {
+          goToPage(2);
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
